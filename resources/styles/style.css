@@ -101,11 +101,12 @@ body {
     border-radius: 8px;
     border-style: none;
     
-    border: 1px rgb(208, 91, 208) solid;
+    
     color: white;
     font-family: 'Poppins', sans-serif;
     width: 200px;
     font-size: 12px;
+    border: 1px rgb(208, 91, 208) solid;
     background: linear-gradient(180deg,  rgb(208, 91, 208),rgb(135, 57, 135));
 
 }
@@ -303,19 +304,29 @@ body {
 
 /* recomendations section  */
 
+.recomen-title{
+    margin-bottom: 30px;
+}
+
+.apis-waifu{
+    display: flex;
+    gap: 10px;
+}
 .api-info{
-    
     background-color: #4a3254;
     max-width: 300px;
     width: 100%;
     border-radius: 10px;
     height: 350px;
+    border: 0.01ch #61446e solid;
 }
 
 .api-waifu-init{
-    
     border-radius: 30px;
     font-size: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 .api-waifu-init .title{
     display: flex;
@@ -330,10 +341,52 @@ body {
     font-family: 'Noto Sans JP', sans-serif;
     font-weight: 500;
 }
+
+
+.parag{
+    width: 100%;
+    max-width: 300px;
+    height: 190px;
+    
+    margin-bottom: 30px;
+    
+
+}
 .api-waifu-init p{
     font-family: 'Noto Sans JP', sans-serif;
-    font-weight: 300;
-    text-align: center;
-    width: 300px;
+    font-weight: 200;
+
     font-size: 13px;
+    color: #d9d9d9;
+    /* background-color: red; */
+    
+    margin: 0px 8% 0px ;
+}
+
+.extern-link{
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    
+}
+
+.extern-link a {
+    border-radius: 7px;
+    text-align: center;
+    text-decoration: none;
+    color: white;
+    background-color: rgb(178, 99, 209);
+    padding: 5px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    font-size: 13px;
+    width: 87px;
+    border: 1px rgb(208, 91, 208) solid;
+    background: linear-gradient(180deg,  rgb(208, 91, 208),rgb(135, 57, 135));
+}
+
+.extern-link a:hover{
+    border: 1px rgb(224, 113, 224) solid;
+    background: linear-gradient(180deg,  rgb(232, 102, 232),rgb(121, 53, 121));
+
 }
