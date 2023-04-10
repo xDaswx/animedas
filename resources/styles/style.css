@@ -100,14 +100,19 @@ body {
     height: 46px;
     border-radius: 8px;
     border-style: none;
-    
-    
     color: white;
     font-family: 'Poppins', sans-serif;
     width: 200px;
     font-size: 12px;
     border: 1px rgb(208, 91, 208) solid;
-    background: linear-gradient(180deg,  rgb(208, 91, 208),rgb(135, 57, 135));
+    background: linear-gradient(180deg, rgb(208, 91, 208),rgb(135, 57, 135));
+    /* text-align: center; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 30p;
+    /* padding: 10px; */
+    gap: 10px;
 
 }
 
@@ -371,6 +376,10 @@ body {
 }
 
 .extern-link a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
     border-radius: 7px;
     text-align: center;
     text-decoration: none;
@@ -379,7 +388,7 @@ body {
     padding: 5px;
     font-family: 'Poppins', sans-serif;
     font-weight: 400;
-    font-size: 13px;
+    font-size: 10px;
     width: 87px;
     border: 1px rgb(208, 91, 208) solid;
     background: linear-gradient(180deg,  rgb(208, 91, 208),rgb(135, 57, 135));
