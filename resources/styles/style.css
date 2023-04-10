@@ -298,3 +298,42 @@ body {
     font-weight: 300;
     color: rgb(182, 182, 182);
 }
+
+
+
+/* recomendations section  */
+
+.api-info{
+    
+    background-color: #4a3254;
+    max-width: 300px;
+    width: 100%;
+    border-radius: 10px;
+    height: 350px;
+}
+
+.api-waifu-init{
+    
+    border-radius: 30px;
+    font-size: 12px;
+}
+.api-waifu-init .title{
+    display: flex;
+    align-items: center;
+    border-bottom: #935ea8 1px solid;
+    background-color: #33223a;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.api-waifu-init h1{
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 500;
+}
+.api-waifu-init p{
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 300;
+    text-align: center;
+    width: 300px;
+    font-size: 13px;
+}
