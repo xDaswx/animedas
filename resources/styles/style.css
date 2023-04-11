@@ -47,7 +47,7 @@ body {
     /* box-shadow: 0px 1px 10px rgb(0, 0, 0); */
     align-items: center;
     gap: 50px;
-    padding-left: 5%;
+    padding-left: 14%;
     color: white;
     font-family: 'Poppins', sans-serif;
     position: sticky;
@@ -76,10 +76,14 @@ body {
 .header-center ul{
     display: flex;
     flex-direction: row;
+    align-items: center;
 
 }
 .header-center ul li {
     width: 100px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+
 }
 .header-right{
     float: right;
@@ -172,9 +176,6 @@ body {
 }
 .apresention-content .paragh{
     font-family: 'Montserrat', sans-serif;
-   
-    
-
 }
 .anime-girl{
     /* imagem waifu normal
@@ -264,8 +265,17 @@ body {
     text-align: center;
     justify-content: center;
     gap: 20px;
-    background-color:  #201824;
-    border-radius: 10px;
+    background-color:  #32253847;
+}
+
+.left-side-border{
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+}
+
+.right-side-border{
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
 }
 
 .list-img {
@@ -437,4 +447,73 @@ body {
 .footer-center .subs:hover{
     color: #746e78;
     cursor: pointer;
+}
+
+.mobile-header {
+    display: none;
+}
+@media screen and (max-width: 768px) {
+    .information{
+        max-width: 370px;
+    }
+    .header {
+        display: none;
+    }
+    .mobile-header{
+            display: flex;
+            background: #231b27;
+            width: 100%;
+            height: 60px;
+            /* box-shadow: 0px 1px 10px rgb(0, 0, 0); */
+            align-items: center;
+            gap: 50px;
+            /* margin-left: 14%; */
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            position: sticky;
+            top: 0;
+            justify-content: center;
+            /* padding-right: 660px; */
+            z-index: 1;
+            text-align: center;
+    }
+    .apis {
+        flex-direction: row;
+        margin-bottom: 3px;
+        margin-top: 35px;
+    }
+    .info{
+        display: block;
+        text-align: center;
+    }
+    .apis-waifu {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+    .apresention-content{
+        width: 90%;
+    }
+    .apresention-image{
+        display: none;
+    }
+    .recomen-title {
+        margin-bottom: 30px;
+        text-align: center;
+    }
+    .recomendations {
+        max-width: 1100px;
+        width: 100%;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        /* justify-content: center; */
+        /* background: red; */
+        align-items: center;
+        /* align-content: center; */
+    }
+    .size-list{
+        border-radius: 10px;
+    }
+
 }
