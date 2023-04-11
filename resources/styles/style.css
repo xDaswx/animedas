@@ -32,6 +32,7 @@
     box-sizing: border-box;
     list-style: none;
     scroll-behavior: smooth !important;
+    text-decoration: none;
 }
 
 body {
@@ -53,6 +54,7 @@ body {
     top: 0;
     justify-content: center;
     padding-right: 660px;
+    z-index: 1;
 
     
 }
@@ -295,11 +297,11 @@ body {
     color: white;
 }
 
-.recomendations .recomen-title h1{
+.recomen-title h1{
     font-family: 'Noto Sans JP', sans-serif;
     font-weight: 500;
 }
-.recomendations .recomen-title p{
+.recomen-title p{
     font-family: 'Noto Sans JP', sans-serif;
     font-weight: 300;
     color: rgb(182, 182, 182);
@@ -371,7 +373,7 @@ body {
 .extern-link{
     display: flex;
     justify-content: center;
-    gap: 50px;
+    gap: 35px;
     
 }
 
@@ -382,14 +384,13 @@ body {
     gap: 5px;
     border-radius: 7px;
     text-align: center;
-    text-decoration: none;
     color: white;
     background-color: rgb(178, 99, 209);
     padding: 5px;
     font-family: 'Poppins', sans-serif;
     font-weight: 400;
     font-size: 10px;
-    width: 87px;
+    width: 90px;
     border: 1px rgb(208, 91, 208) solid;
     background: linear-gradient(180deg,  rgb(208, 91, 208),rgb(135, 57, 135));
 }
@@ -398,4 +399,42 @@ body {
     border: 1px rgb(224, 113, 224) solid;
     background: linear-gradient(180deg,  rgb(232, 102, 232),rgb(121, 53, 121));
 
+}
+
+/* statics section  */
+
+.statics{
+    width: 1100px;
+    color: white;
+}
+
+
+.footer {
+    display: flex;
+    height: 70px;
+    background-color: #1c1723;
+    align-items: center;
+    justify-content: center;
+    border-top: 1px solid rgba(123, 123, 123, 0.496);
+}
+
+.footer-things{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    font-family: 'Poppins', sans-serif;
+    color: white;
+}
+
+
+.footer-center .subs{
+    font-size: 10px;
+    color: #413447;
+    margin: 0px 10px 0px 0px;
+    text-align: center;
+}
+
+.footer-center .subs:hover{
+    color: #746e78;
+    cursor: pointer;
 }
