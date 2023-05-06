@@ -7,18 +7,18 @@ const app = express();
 
 app.use(bodyParser.json());
 
-// Middleware para capturar erros de análise de JSON
+// Middleware para capturar erros de análise de JSON em POST requests
 app.use((err: any, req: Request, res: Response, next: NextFunction) => {
     if (err instanceof SyntaxError) {
-        res.status(400).json({ message: 'JSON inválido' });
+        return res.status(400).json({ message: 'JSON inválido' });
     } 
     else {
-        res.status(500).json({ message: 'Erro interno no servidor' });
+        return res.status(500).json({ message: 'SERVER_ERROR' });
       }
   next();
 });
 
-app.use(routers)
+app.use('/api/v1',routers)
 
 // Iniciar servidor
 const port = 80;
