@@ -1,10 +1,13 @@
 import express, { NextFunction, Request, Response } from 'express';
 import * as bodyParser from 'body-parser';
 import routers from './routes/rotas'
-import Joi from 'joi';
+import cors from 'cors'
+require('dotenv').config()
 
 const app = express();
-
+app.use(cors({
+    origin: '*'
+}))
 app.use(bodyParser.json());
 
 // Middleware para capturar erros de análise de JSON em POST requests
