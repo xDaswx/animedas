@@ -6,24 +6,24 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 // import * as bodyParser from 'body-parser';
 const rotas_1 = __importDefault(require("./routes/rotas"));
-// import cors from 'cors'
-// require('dotenv').config()
+const cors_1 = __importDefault(require("cors"));
+require('dotenv').config();
 const app = (0, express_1.default)();
-// app.use(cors({
-//     origin: '*'
-// }))
-// app.use(bodyParser.json());
+app.use((0, cors_1.default)({
+    origin: '*'
+}));
+app.use(express_1.default.json());
 app.use(express_1.default.static('./public'));
-// // Middleware para capturar erros de análise de JSON em POST requests
-// app.use((err: any, req: Request, res: Response, next: NextFunction) => {
-//     if (err instanceof SyntaxError) {
-//         return res.status(400).json({ message: 'JSON inválido' });
-//     } 
-//     else {
-//         return res.status(500).json({ message: 'SERVER_ERROR' });
-//       }
-//   next();
-// });
+// Middleware para capturar erros de análise de JSON em POST requests
+app.use((err, req, res, next) => {
+    if (err instanceof SyntaxError) {
+        return res.status(400).json({ message: 'JSON inválido' });
+    }
+    else {
+        return res.status(500).json({ message: 'SERVER_ERROR' });
+    }
+    next();
+});
 app.use('/api/v1', rotas_1.default);
 app.get('/teste', (req, res) => {
     res.status(200).send('Tudo ok!');
