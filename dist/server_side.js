@@ -13,7 +13,7 @@ const app = (0, express_1.default)();
 //     origin: '*'
 // }))
 // app.use(bodyParser.json());
-// app.use(express.static('./public'))
+app.use(express_1.default.static('./public'));
 // // Middleware para capturar erros de análise de JSON em POST requests
 // app.use((err: any, req: Request, res: Response, next: NextFunction) => {
 //     if (err instanceof SyntaxError) {
