@@ -22,16 +22,13 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
-const req_validator_1 = __importDefault(require("../validators/req_validator"));
+// import validator from '../validators/req_validator';
 const animeController = __importStar(require("../controllers/animeController"));
 const router = (0, express_1.Router)();
 router.get('/random', animeController.getAnimes_random);
-router.post('/putanim', req_validator_1.default, animeController.putAnime);
+router.post('/putanim', animeController.putAnime);
 router.get('/maid', animeController.getAnimes_maid);
 router.get('/waifu', animeController.getAnimes_waifu);
 exports.default = router;
