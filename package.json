@@ -2,7 +2,10 @@
   "name": "dsw-anime",
   "version": "1.0.0",
   "description": "anime api project",
-  "main": "index.js",
+  "main": "src/server_side.ts",
+  "engines": {
+    "node": "18.x"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start-nodemon": "nodemon src/server_side.ts"
@@ -14,7 +17,8 @@
   "license": "ISC",
   "devDependencies": {
     "@types/node": "^18.15.11",
-    "@types/validator": "^13.7.14"
+    "@types/validator": "^13.7.14",
+    "@vercel/node": "^2.14.2"
   },
   "dependencies": {
     "@types/cors": "^2.8.13",

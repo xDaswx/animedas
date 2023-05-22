@@ -10,6 +10,8 @@ app.use(cors({
 }))
 app.use(bodyParser.json());
 
+app.use(express.static('./public'))
+
 // Middleware para capturar erros de análise de JSON em POST requests
 app.use((err: any, req: Request, res: Response, next: NextFunction) => {
     if (err instanceof SyntaxError) {
@@ -22,6 +24,11 @@ app.use((err: any, req: Request, res: Response, next: NextFunction) => {
 });
 
 app.use('/api/v1',routers)
+
+app.get('/teste', (req,res)=>{
+    res.status(200).send('Tudo ok!')
+})
+
 
 // Iniciar servidor
 const port = 80;
