@@ -5,7 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 // import * as bodyParser from 'body-parser';
-// import routers from './routes/rotas'
+const rotas_1 = __importDefault(require("./routes/rotas"));
 // import cors from 'cors'
 // require('dotenv').config()
 const app = (0, express_1.default)();
@@ -24,7 +24,7 @@ app.use(express_1.default.static('./public'));
 //       }
 //   next();
 // });
-// app.use('/api/v1',routers)
+app.use('/api/v1', rotas_1.default);
 app.get('/teste', (req, res) => {
     res.status(200).send('Tudo ok!');
 });
