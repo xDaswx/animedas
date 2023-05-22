@@ -25,8 +25,8 @@ app.use((err, req, res, next) => {
     next();
 });
 app.use('/api/v1', rotas_1.default);
-app.get('/teste', (req, res) => {
-    res.status(200).send('Tudo ok!');
+app.use((req, res) => {
+    res.redirect('https://animedas-production.up.railway.app/');
 });
 // Iniciar servidor
 const port = 80;

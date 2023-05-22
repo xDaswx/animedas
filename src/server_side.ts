@@ -25,8 +25,8 @@ app.use((err: any, req: Request, res: Response, next: NextFunction) => {
 
 app.use('/api/v1',routers)
 
-app.get('/teste', (req,res)=>{
-    res.status(200).send('Tudo ok!')
+app.use((req,res)=>{
+    res.redirect('https://animedas-production.up.railway.app/')
 })
 
 
