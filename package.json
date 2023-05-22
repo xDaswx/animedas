@@ -2,11 +2,12 @@
   "name": "dsw-anime",
   "version": "1.0.0",
   "description": "anime api project",
-  "main": "src/server_side.ts",
+  "main": "dist/server_side.js",
   "engines": {
     "node": "18.x"
   },
   "scripts": {
+    "start": "node dist/server_side.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start-nodemon": "nodemon src/server_side.ts"
   },
