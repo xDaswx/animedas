@@ -8,6 +8,7 @@
   },
   "scripts": {
     "start": "node dist/server_side.js",
+    "install": "copyfiles -u 1 src/**/*.mustache dist/",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start-nodemon": "nodemon src/server_side.ts"
   },
