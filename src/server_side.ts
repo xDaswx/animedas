@@ -1,6 +1,6 @@
 import express, { NextFunction, Request, Response } from 'express';
 // import * as bodyParser from 'body-parser';
-// import routers from './routes/rotas'
+import routers from './routes/rotas'
 // import cors from 'cors'
 // require('dotenv').config()
 
@@ -10,7 +10,7 @@ const app = express();
 // }))
 // app.use(bodyParser.json());
 
-// app.use(express.static('./public'))
+app.use(express.static('./public'))
 
 // // Middleware para capturar erros de análise de JSON em POST requests
 // app.use((err: any, req: Request, res: Response, next: NextFunction) => {
@@ -23,7 +23,7 @@ const app = express();
 //   next();
 // });
 
-// app.use('/api/v1',routers)
+app.use('/api/v1',routers)
 
 app.get('/teste', (req,res)=>{
     res.status(200).send('Tudo ok!')
