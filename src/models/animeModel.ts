@@ -1,30 +1,45 @@
-import db from './connection'
+import {sequelize} from '../instances/pg_connection'
+import {Model, DataTypes} from 'sequelize'
 require('dotenv').config()
 
 
-const getRandomAnime = async () =>{
-    try{
-        const query = await db.query('SELECT * FROM "images"')
-        return query.rows
-    }catch (error){
-        console.log(error)
-        return 'Error ao obter dados'
-    }
+export interface AnimeModel extends Model {
+    id:number;
+    tag_type:string;
+    width:string;
+    height:string;
+    source:string;
+    url:string;
+    description:string;
 }
 
-
-const putAnime = async (data:any) =>{
-    if (data.secret_key != process.env.SECRET_KEY) return 'Key incorreta'
-
-    const hora = new Date().toUTCString()
-    try{
-        const query = await db.query('INSERT INTO "images" (uploaded_at,source,type,description) VALUES ($1, $2, $3, $4)', [hora, data.url,data.type,data.description]);
-        return query.rowCount
-    }catch (error){
-        console.log(error)
-        return 'Error ao obter dados'
+export const AnimeDatabase = sequelize.define<AnimeModel>('AnimeDatabase',{
+    id:{
+        primaryKey:true,
+        autoIncrement:true,
+        type:DataTypes.INTEGER
+    },
+    tag_type:{
+        type: DataTypes.STRING
+    },
+    width:{
+        type: DataTypes.STRING
+    },
+    height:{
+        type: DataTypes.STRING
+    },
+    source:{
+        type: DataTypes.STRING
+    },
+    url:{
+        type: DataTypes.STRING
+    },
+    description:{
+        type: DataTypes.STRING
     }
+},{
+    tableName:'images',
+    timestamps:false
 }
 
-
-export {getRandomAnime,putAnime}
+)
