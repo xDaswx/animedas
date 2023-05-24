@@ -31,7 +31,6 @@ const getAnimes_maid = (req:Request,res:Response) => {
     res.status(200).json(response)
 }
 
-
 const getAnimes_waifu = (req:Request,res:Response) => {
     const response = {
         message:'OK',
