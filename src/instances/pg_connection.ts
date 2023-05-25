@@ -13,7 +13,6 @@ export const sequelize = new Sequelize(
         port: 5432
     }
 )
-
 try{
     sequelize.authenticate()
     console.log('Autenticado ao banco de dados')
