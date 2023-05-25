@@ -1,59 +1,40 @@
 import {Request,Response} from "express";
-import * as Models from '../models/animeModel'
+import {AnimeDatabase} from '../models/animeModel'
 
 
 const getAnimes_random = async (req:Request,res:Response) => {
-    const response = {
-        message:'OK',
-        url:'http//cdn.localhost/testing.png',
-        width: 1500,
-        height:968,
-        source:'test',
-        tag_type: 'maid',
-        description: await Models.getRandomAnime(),
-        id:999
-    }
-    res.status(200).json(response)
-}
-
-
-const getAnimes_maid = (req:Request,res:Response) => {
-    const response = {
-        message:'OK',
-        url:'http//cdn.localhost/testing.png',
-        width: 1500,
-        height:968,
-        source:'test',
-        tag_type: 'maid',
-        description:'',
-        id:999
-    }
-    res.status(200).json(response)
-}
-
-const getAnimes_waifu = (req:Request,res:Response) => {
-    const response = {
-        message:'OK',
-        url:'http//cdn.localhost/testing.png',
-        width: 1500,
-        height: 968,
-        source:'test',
-        tag_type: 'maid',
-        description:'',
-        id:999
-    }
-    res.status(200).json(response)
+    let conteudos = await AnimeDatabase.findAll()
+    res.status(200).json({message:'testando', conteudo: conteudos})
 }
 
 const putAnime = async (req:Request, res:Response) => {
-    const data = req.body
-    const anime = await Models.putAnime(data);
-    const response = {
-        message:'OK',
-        retorno: anime,
-    }
-    res.status(201).json(response)
+
+    const {tag_type,width,height,source,url,description,secret_key} = req.body
+    if (req.body.secret_key !== process.env.SECRET_KEY) return res.status(403).json({message:'Wrong SecretKey'})
+
+    let put = await AnimeDatabase.create({
+        tag_type: tag_type,
+        width: parseInt(width),
+        height: parseInt(height),
+        source: source,
+        url: url,
+        description: description,
+    })
+    res.status(201).json({message:'OK', response: put})
+}
+
+const deleteAnime = async (req:Request, res:Response) => {
+    const {id,secret_key} = req.body
+
+    if (secret_key !== process.env.SECRET_KEY) return res.status(403).json({message:'Wrong SecretKey'})
+
+    let AnimeDeleteById = await AnimeDatabase.destroy({
+        where:{
+            id: id
+        }
+    })
+    res.status(200).json({message:`ID ${1} deleted`,information: AnimeDeleteById})
 }
 
 
-export {getAnimes_random,getAnimes_maid,getAnimes_waifu,putAnime};
+export {getAnimes_random,putAnime,deleteAnime};
