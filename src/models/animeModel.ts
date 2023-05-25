@@ -6,8 +6,8 @@ require('dotenv').config()
 export interface AnimeModel extends Model {
     id:number;
     tag_type:string;
-    width:string;
-    height:string;
+    width:number;
+    height:number;
     source:string;
     url:string;
     description:string;
@@ -23,10 +23,10 @@ export const AnimeDatabase = sequelize.define<AnimeModel>('AnimeDatabase',{
         type: DataTypes.STRING
     },
     width:{
-        type: DataTypes.STRING
+        type: DataTypes.INTEGER
     },
     height:{
-        type: DataTypes.STRING
+        type: DataTypes.INTEGER
     },
     source:{
         type: DataTypes.STRING
@@ -38,7 +38,7 @@ export const AnimeDatabase = sequelize.define<AnimeModel>('AnimeDatabase',{
         type: DataTypes.STRING
     }
 },{
-    tableName:'images',
+    tableName:'animedas',
     timestamps:false
 }
 
