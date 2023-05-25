@@ -12,10 +12,9 @@ exports.sequelize = new sequelize_1.Sequelize(process.env.DATABASE, process.env.
     dialect: 'postgres',
     port: 5432
 });
-try {
-    exports.sequelize.authenticate();
-    console.log('Autenticado ao banco de dados');
-}
-catch (error) {
-    console.log('Erro ao se conectar ao banco de dados', error);
-}
+exports.sequelize
+    .authenticate()
+    .then(() => { console.log('Conexão ao banco de dados bem sucedida'); })
+    .catch((error) => {
+    console.log('Erro ao se conectar no banco de dados: ', error);
+});
