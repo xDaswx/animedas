@@ -39,25 +39,33 @@ body {
     background: #1c151f;
 }
 
-.header{
+.header {
     display: flex;
     background: #231b27;
     width: 100%;
     height: 60px;
     /* box-shadow: 0px 1px 10px rgb(0, 0, 0); */
-    align-items: center;
-    gap: 50px;
-    padding-left: 14%;
+    /* align-items: center; */
+    /* gap: 50px; */
+    /* padding-left: 14%; */
     color: white;
     font-family: 'Poppins', sans-serif;
     position: sticky;
     top: 0;
     justify-content: center;
-    padding-right: 660px;
+    /* padding-right: 660px; */
     z-index: 1;
-
-    
 }
+
+.header-childers {
+    display: flex;
+    /* background-color: crimson; */
+    width: 1070px;
+    /* text-align: center; */
+    gap: 50px;
+    align-items: center;
+}
+
 .header-icone{
     font-size: 24px;
     letter-spacing: 0.2rem;
@@ -155,17 +163,19 @@ body {
     font-family: 'Poppins', sans-serif;
 
 }
-.apresention-content{
+.apresention-content {
     display: flex;
     flex-direction: column;
     color: white;
     font-size: 20px;
-    /* max-width: 700px; */
+    max-width: 700px;
     width: 50%;
     gap: 30px;
+    /* background-color: red; */
 }
 .apresention-content .title{
-    font-size: 50px;
+    max-width: 600px;
+    font-size: 40px;
     line-height: 1.2;
     font-family: 'Poppins', sans-serif;
     background: -webkit-linear-gradient(#eee, rgb(208, 91, 208));
@@ -174,8 +184,11 @@ body {
     
 
 }
-.apresention-content .paragh{
+.apresention-content .paragh {
+    max-width: 600px;
     font-family: 'Montserrat', sans-serif;
+    line-height: 23px;
+    font-size: 16px;
 }
 .anime-girl{
     /* imagem waifu normal
@@ -201,7 +214,7 @@ body {
 }
 
 .hero-bg {
-    background-image: url(https://cdn.mangas.io/landing/BG-min.png);
+    background-image: url('../BG-min.png');
     background-position: bottom;
     background-repeat: no-repeat;
     background-size: cover;
