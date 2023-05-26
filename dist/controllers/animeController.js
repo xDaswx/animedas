@@ -1,27 +1,4 @@
 "use strict";
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -32,57 +9,37 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.putAnime = exports.getAnimes_waifu = exports.getAnimes_maid = exports.getAnimes_random = void 0;
-const Models = __importStar(require("../models/animeModel"));
+exports.deleteAnime = exports.putAnime = exports.getAnimes_random = void 0;
+const animeModel_1 = require("../models/animeModel");
 const getAnimes_random = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const response = {
-        message: 'OK',
-        url: 'http//cdn.localhost/testing.png',
-        width: 1500,
-        height: 968,
-        source: 'test',
-        tag_type: 'maid',
-        description: yield Models.getRandomAnime(),
-        id: 999
-    };
-    res.status(200).json(response);
+    let conteudos = yield animeModel_1.AnimeDatabase.findAll();
+    res.status(200).json({ message: 'testando', conteudo: conteudos });
 });
 exports.getAnimes_random = getAnimes_random;
-const getAnimes_maid = (req, res) => {
-    const response = {
-        message: 'OK',
-        url: 'http//cdn.localhost/testing.png',
-        width: 1500,
-        height: 968,
-        source: 'test',
-        tag_type: 'maid',
-        description: '',
-        id: 999
-    };
-    res.status(200).json(response);
-};
-exports.getAnimes_maid = getAnimes_maid;
-const getAnimes_waifu = (req, res) => {
-    const response = {
-        message: 'OK',
-        url: 'http//cdn.localhost/testing.png',
-        width: 1500,
-        height: 968,
-        source: 'test',
-        tag_type: 'maid',
-        description: '',
-        id: 999
-    };
-    res.status(200).json(response);
-};
-exports.getAnimes_waifu = getAnimes_waifu;
 const putAnime = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const data = req.body;
-    const anime = yield Models.putAnime(data);
-    const response = {
-        message: 'OK',
-        retorno: anime,
-    };
-    res.status(201).json(response);
+    const { tag_type, width, height, source, url, description, secret_key } = req.body;
+    if (req.body.secret_key !== process.env.SECRET_KEY)
+        return res.status(403).json({ message: 'Wrong SecretKey' });
+    let put = yield animeModel_1.AnimeDatabase.create({
+        tag_type: tag_type,
+        width: parseInt(width),
+        height: parseInt(height),
+        source: source,
+        url: url,
+        description: description,
+    });
+    res.status(201).json({ message: 'OK', response: put });
 });
 exports.putAnime = putAnime;
+const deleteAnime = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { id, secret_key } = req.body;
+    if (secret_key !== process.env.SECRET_KEY)
+        return res.status(403).json({ message: 'Wrong SecretKey' });
+    let AnimeDeleteById = yield animeModel_1.AnimeDatabase.destroy({
+        where: {
+            id: id
+        }
+    });
+    res.status(200).json({ message: `ID ${1} deleted`, information: AnimeDeleteById });
+});
+exports.deleteAnime = deleteAnime;

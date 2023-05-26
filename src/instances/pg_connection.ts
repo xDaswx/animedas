@@ -14,10 +14,9 @@ export const sequelize = new Sequelize(
     }
 )
 
-try{
-    sequelize.authenticate()
-    console.log('Autenticado ao banco de dados')
-}
-catch(error){
-    console.log('Erro ao se conectar ao banco de dados', error)    
-}
+sequelize
+.authenticate()
+.then(()=>{console.log('Conexão ao banco de dados bem sucedida')})
+.catch((error) =>{
+    console.log('Erro ao se conectar no banco de dados: ', error)
+})
