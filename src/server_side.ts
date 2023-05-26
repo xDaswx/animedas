@@ -32,7 +32,7 @@ app.use((err: any, req: Request, res: Response, next: NextFunction) => {
 
 app.use('/api/v1',routers)
 app.get('/home', (req:Request, res:Response)=> {
-    res.render('teste',{
+    res.render('home',{
         name:[{idade:12},{idade:19}]
     })
 })
