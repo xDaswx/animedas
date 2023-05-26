@@ -10,9 +10,11 @@ const getAnimes_random = async (req:Request,res:Response) => {
 const putAnime = async (req:Request, res:Response) => {
 
     const {tag_type,width,height,source,url,description,secret_key} = req.body
-    if (req.body.secret_key !== process.env.SECRET_KEY) return res.status(403).json({message:'Wrong SecretKey'})
 
-    let put = await AnimeDatabase.create({
+    if (secret_key !== process.env.SECRET_KEY) return res.status(403).json({message:'Wrong SecretKey'})
+    
+    try {
+        const put = await AnimeDatabase.create({
         tag_type: tag_type,
         width: parseInt(width),
         height: parseInt(height),
@@ -20,20 +22,31 @@ const putAnime = async (req:Request, res:Response) => {
         url: url,
         description: description,
     })
-    res.status(201).json({message:'OK', response: put})
+        return res.status(201).json({message:'OK', response: put})
+    }
+    catch(error){
+        console.log('Requisição erro:', error)
+        return res.status(401).json({message:'Error'})
+    }
 }
 
 const deleteAnime = async (req:Request, res:Response) => {
     const {id,secret_key} = req.body
 
     if (secret_key !== process.env.SECRET_KEY) return res.status(403).json({message:'Wrong SecretKey'})
-
-    let AnimeDeleteById = await AnimeDatabase.destroy({
+    try{
+        let AnimeDeleteById = await AnimeDatabase.destroy({
         where:{
             id: id
-        }
-    })
-    res.status(200).json({message:`ID ${1} deleted`,information: AnimeDeleteById})
+            }
+        })
+        return res.status(200).json({message:`ID ${1} deleted`,information: AnimeDeleteById})
+    }
+    catch(error) {
+        console.log('delete/anime endpoint:' ,error)
+        return res.status(400).json({message:'Error'})
+    }
+
 }
 
 
