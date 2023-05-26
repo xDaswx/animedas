@@ -30,12 +30,19 @@ app.use((err, req, res, next) => {
 });
 app.use('/api/v1', rotas_1.default);
 app.get('/home', (req, res) => {
-    res.render('teste', {
-        name: [{ idade: 12 }, { idade: 19 }]
+    const phrases = [
+        'Expand Your Anime Image Library with an Additional API Integration',
+        'Discover a Second API Source for Anime Icons on Our Website',
+        'Level up Your Anime Image Repository with a Second API Connection',
+        'Access a Diverse Selection of Anime Icons with Another API Integration'
+    ];
+    const random = Math.floor(Math.random() * phrases.length);
+    res.render('home', {
+        home: { title: phrases[random], img: 'noone' }
     });
 });
 app.use((req, res) => {
-    res.redirect('https://animedas-production.up.railway.app/');
+    res.redirect('/home');
 });
 // Iniciar servidor
 const port = 80;
