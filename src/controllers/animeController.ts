@@ -1,10 +1,23 @@
 import {Request,Response} from "express";
 import {AnimeDatabase} from '../models/animeModel'
+import {sequelize} from '../instances/pg_connection'
 
 
 const getAnimes_random = async (req:Request,res:Response) => {
-    let conteudos = await AnimeDatabase.findAll()
-    res.status(200).json({message:'testando', conteudo: conteudos})
+    try{
+
+        let conteudos = await AnimeDatabase.findAll({
+        order: sequelize.random(),
+        limit:1
+        })
+        
+        res.status(200).json({message:'Successful', content: conteudos})
+    }catch (err){
+        res.status(200).json({message:'Error', content: []})
+
+    }
+
+    
 }
 
 const putAnime = async (req:Request, res:Response) => {
