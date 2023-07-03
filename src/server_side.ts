@@ -32,13 +32,21 @@ app.use((err: any, req: Request, res: Response, next: NextFunction) => {
 
 app.use('/api/v1',routers)
 app.get('/home', (req:Request, res:Response)=> {
+
+    const phrases = [
+            'Expand Your Anime Image Library with an Additional API Integration',
+            'Discover a Second API Source for Anime Icons on Our Website',
+            'Level up Your Anime Image Repository with a Second API Connection',
+            'Access a Diverse Selection of Anime Icons with Another API Integration']
+
+    const random = Math.floor(Math.random() * phrases.length)
     res.render('home',{
-        name:[{idade:12},{idade:19}]
+        home:{title:phrases[random],img:'noone'}
     })
 })
 
 app.use((req,res)=>{
-    res.redirect('https://animedas-production.up.railway.app/')
+    res.redirect('/home')
 })
 
 
