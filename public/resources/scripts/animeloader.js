@@ -1,4 +1,4 @@
-fetch('http://localhost/api/v1/random', {
+fetch('https://animedas-production.up.railway.app/api/v1/random', {
     method: 'GET',
     headers:{
         'Content-Type': 'application/json'}
