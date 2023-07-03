@@ -10,7 +10,7 @@ dotenv_1.default.config();
 exports.sequelize = new sequelize_1.Sequelize(process.env.DATABASE, process.env.USER, process.env.PASSWORD, {
     host: process.env.HOST,
     dialect: 'postgres',
-    port: 5432
+    port: 7018
 });
 exports.sequelize
     .authenticate()
