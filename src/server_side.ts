@@ -1,14 +1,15 @@
 import express, { NextFunction, Request, Response } from 'express';
 import path from 'path';
 import mustacheExpress from 'mustache-express';
-import routers from './routes/rotas'
+import APIrouters from './routes/rotas'
+import SITErouters from './routes/SITErotas'
 import cors from 'cors'
 require('dotenv').config()
 
 const app = express();
 app.engine('mustache', mustacheExpress())
 app.set('view engine', 'mustache')
-app.set('views', path.join(__dirname,'views'))
+app.set('views', path.join(__dirname,'/views'))
 app.use(express.json());
 
 app.use(cors({
@@ -16,8 +17,6 @@ app.use(cors({
 }))
 
 app.use(express.static('public'))
-
-
 
 // Middleware para capturar erros de análise de JSON em POST requests
 app.use((err: any, req: Request, res: Response, next: NextFunction) => {
@@ -30,25 +29,17 @@ app.use((err: any, req: Request, res: Response, next: NextFunction) => {
   next();
 });
 
-app.use('/api/v1',routers)
-app.get('/home', (req:Request, res:Response)=> {
+app.use('/api/v1',APIrouters)
+app.use('/',SITErouters)
 
-    const phrases = [
-            'Expand Your Anime Image Library with an Additional API Integration',
-            'Discover a Second API Source for Anime Icons on Our Website',
-            'Level up Your Anime Image Repository with a Second API Connection',
-            'Access a Diverse Selection of Anime Icons with Another API Integration']
+//Middleware se a path não for encontrada
+app.use('/api/v1', (req:Request, res:Response) => {
+    res.status(404).json({ message: {error: 'Path not found',status:404}});
+});
 
-    const random = Math.floor(Math.random() * phrases.length)
-    res.render('home',{
-        home:{title:phrases[random],img:'noone'}
-    })
-})
-
-app.use((req,res)=>{
+app.use((req:Request, res:Response)=>{
     res.redirect('/home')
 })
-
 
 // Iniciar servidor
 const port = 80;

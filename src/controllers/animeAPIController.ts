@@ -8,14 +8,14 @@ import {sequelize} from '../instances/pg_connection'
 
 const getSome = async (req:Request,res:Response) => {
     try{
-        let server_response = ''
         let animes = await AnimeDatabase.findAll({
+        order:sequelize.random(),
         limit:20,
         })
         if (animes === null){
             return res.status(200).json({message:{error:'No Content',status:204}, content: null})
         }
-        res.status(200).json({message:server_response, content: animes})
+        res.status(200).json({message:'Successful', content: animes})
     }catch (err){
         res.status(200).json({message:'Error', content: []})
 
@@ -48,7 +48,6 @@ const getRandomMaid = async (req:Request,res:Response) => {
             tag_type:'maid'
         },
         order: sequelize.random(),
-        limit:1
         })
 
         if (conteudos === null){
@@ -65,12 +64,11 @@ const getRandomMaid = async (req:Request,res:Response) => {
 const getRandomWaifu = async (req:Request,res:Response) => {
     try{
 
-        let conteudos = await AnimeDatabase.findAll({
+        let conteudos = await AnimeDatabase.findOne({
         where: {
             tag_type:'waifu'
         },
         order: sequelize.random(),
-        limit:1
         })
         if (conteudos === null){
             return res.status(200).json({message:{error:'No Content',status:204}, content: conteudos})
@@ -85,12 +83,11 @@ const getRandomWaifu = async (req:Request,res:Response) => {
 
 const getRandomSmug = async (req:Request,res:Response) => {
     try{
-        let conteudos = await AnimeDatabase.findAll({
+        let conteudos = await AnimeDatabase.findOne({
         where: {
             tag_type:'smug'
         },
         order: sequelize.random(),
-        limit:1
         })
         if (conteudos === null){
             return res.status(200).json({message:{error:'No Content',status:204}, content: conteudos})
@@ -106,7 +103,7 @@ const getRandomSmug = async (req:Request,res:Response) => {
 const getRandomGenshin = async (req:Request,res:Response) => {
     try{
 
-        let conteudos = await AnimeDatabase.findAll({
+        let conteudos = await AnimeDatabase.findOne({
         where: {
             tag_type:'genshin '
         },
