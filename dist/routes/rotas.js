@@ -28,11 +28,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const req_validator_1 = __importDefault(require("../validators/req_validator"));
-const animeController = __importStar(require("../controllers/animeController"));
+const animeController = __importStar(require("../controllers/animeAPIController"));
 const router = (0, express_1.default)();
-router.get('/random', animeController.getAnimes_random);
+router.get('/many/random', animeController.getSome);
+router.get('/random', animeController.getRandom);
+router.get('/random/maid', animeController.getRandomMaid);
+router.get('/random/waifu', animeController.getRandomWaifu);
+router.get('/random/smug', animeController.getRandomSmug);
+router.get('/random/genshin', animeController.getRandomGenshin);
 router.post('/put/anime', req_validator_1.default, animeController.putAnime);
 router.post('/delete/anime', animeController.deleteAnime);
-router.get('/maid', animeController.getAnimes_random);
-router.get('/waifu', animeController.getAnimes_random);
 exports.default = router;
