@@ -33,7 +33,6 @@ const seeByID = (async (req:Request, res:Response)=>{
         }).catch((error)=>{
             console.log('deu erro:', error)
         })
-        console.log(image)
         if (image === null) have_images = false
         res.render(dir+'/preview',{image,have_images})
 

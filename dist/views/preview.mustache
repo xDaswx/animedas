@@ -12,11 +12,23 @@
       <link rel="icon" href="https://www.pngall.com/wp-content/uploads/2016/07/Anime-PNG-Images.png"/>
    </head>
 
+    {{^have_images}}
+        <body style="background-image: url('https://preview.redd.it/d1owe2n7ev181.png?width=640&crop=smart&auto=webp&s=42f4aa3bfb8f94d01e37e1f1f49a5fec395f1a46')">
+    {{/have_images}}
 
-        <body>
+    {{#have_images}}
+        <body style="background-image: url('{{image.url}}')">
+    {{/have_images}}
+   
+      <div class="main" style="backdrop-filter: blur(10px);">
+         <!-- header pc -->
+         <header class="header-gallery">
 
-      <div class="main">
+            <div class="header-icone">
+               <a href="/home">ANIMÉ<a href="/home" class="color-purple">DAS</a></a>
+            </div>
 
+         </header>
         
         
       {{#have_images}}
@@ -27,7 +39,7 @@
             </div>
 
         </section>
-        
+        {{>../src/views/partials/footer}}
       {{/have_images}}
 
     {{^have_images}}
@@ -42,12 +54,6 @@
       </div>  
       
 
-
+      
    </body>
-   <script>
-   
-
-
-
-   </script>
 </html>
