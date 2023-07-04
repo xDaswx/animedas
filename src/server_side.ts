@@ -45,6 +45,10 @@ app.get('/home', (req:Request, res:Response)=> {
     })
 })
 
+app.get('/gallery', (req:Request, res:Response)=> {
+    res.render('gallery')
+})
+
 app.use((req,res)=>{
     res.redirect('/home')
 })
