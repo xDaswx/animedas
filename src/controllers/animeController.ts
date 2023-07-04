@@ -3,21 +3,125 @@ import {AnimeDatabase} from '../models/animeModel'
 import {sequelize} from '../instances/pg_connection'
 
 
-const getAnimes_random = async (req:Request,res:Response) => {
+
+
+
+const getSome = async (req:Request,res:Response) => {
+    try{
+        let server_response = ''
+        let animes = await AnimeDatabase.findAll({
+        limit:20,
+        })
+        if (animes === null){
+            return res.status(200).json({message:{error:'No Content',status:204}, content: null})
+        }
+        res.status(200).json({message:server_response, content: animes})
+    }catch (err){
+        res.status(200).json({message:'Error', content: []})
+
+    }
+}
+
+const getRandom = async (req:Request,res:Response) => {
     try{
 
-        let conteudos = await AnimeDatabase.findAll({
+        let conteudos = await AnimeDatabase.findOne({
         order: sequelize.random(),
         limit:1
         })
+
+        if (conteudos === null){
+            return res.status(200).json({message:{error:'No Content',status:204}, content: conteudos})
+        }
+        res.status(200).json({message:'Successful', content: conteudos})
+    }catch (err){
+        res.status(200).json({message:'Error', content: []})
+
+    }
+}
+
+const getRandomMaid = async (req:Request,res:Response) => {
+    try{
+
+        let conteudos = await AnimeDatabase.findOne({
+        where: {
+            tag_type:'maid'
+        },
+        order: sequelize.random(),
+        limit:1
+        })
+
+        if (conteudos === null){
+            return res.status(200).json({message:{error:'No Content',status:204}, content: conteudos})
+        }
+        res.status(200).json({message:'Successful', content: conteudos})
+
+    }catch (err){
+        res.status(200).json({message:'Error', content: []})
+
+    }
+}
+
+const getRandomWaifu = async (req:Request,res:Response) => {
+    try{
+
+        let conteudos = await AnimeDatabase.findAll({
+        where: {
+            tag_type:'waifu'
+        },
+        order: sequelize.random(),
+        limit:1
+        })
+        if (conteudos === null){
+            return res.status(200).json({message:{error:'No Content',status:204}, content: conteudos})
+        }
         
         res.status(200).json({message:'Successful', content: conteudos})
     }catch (err){
         res.status(200).json({message:'Error', content: []})
 
     }
+}
 
-    
+const getRandomSmug = async (req:Request,res:Response) => {
+    try{
+        let conteudos = await AnimeDatabase.findAll({
+        where: {
+            tag_type:'smug'
+        },
+        order: sequelize.random(),
+        limit:1
+        })
+        if (conteudos === null){
+            return res.status(200).json({message:{error:'No Content',status:204}, content: conteudos})
+        }
+        
+        res.status(200).json({message:'Successful', content: conteudos})
+    }catch (err){
+        res.status(200).json({message:'Error', content: []})
+
+    }
+}
+
+const getRandomGenshin = async (req:Request,res:Response) => {
+    try{
+
+        let conteudos = await AnimeDatabase.findAll({
+        where: {
+            tag_type:'genshin '
+        },
+        order: sequelize.random(),
+        limit:1
+        })
+        if (conteudos === null){
+            return res.status(200).json({message:{error:'No Content',status:204}, content: conteudos})
+        }
+        
+        res.status(200).json({message:'Successful', content: conteudos})
+    }catch (err){
+        res.status(200).json({message:'Error', content: []})
+
+    }
 }
 
 const putAnime = async (req:Request, res:Response) => {
@@ -63,4 +167,4 @@ const deleteAnime = async (req:Request, res:Response) => {
 }
 
 
-export {getAnimes_random,putAnime,deleteAnime};
+export {getRandom,getRandomMaid,getRandomWaifu,getRandomSmug,getRandomGenshin,getSome,putAnime,deleteAnime};
