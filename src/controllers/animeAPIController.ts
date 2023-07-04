@@ -130,8 +130,6 @@ const putAnime = async (req:Request, res:Response) => {
     try {
         const put = await AnimeDatabase.create({
         tag_type: tag_type,
-        width: parseInt(width),
-        height: parseInt(height),
         source: source,
         url: url,
         description: description,
