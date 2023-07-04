@@ -24,6 +24,7 @@ a {
     column-gap: 0;
 }
 .api-images .anime{
+    cursor: pointer;
     width: 100%!important;
     height: auto!important;
 }
