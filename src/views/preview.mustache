@@ -6,12 +6,20 @@
       <title>Animédas</title>
       <meta name="description" content="">
       <meta name="viewport" content="width=device-width, initial-scale=1">
-      <link rel="stylesheet" href="resources/styles/style.css">
-      <link rel="stylesheet" href="resources/styles/gallery.css">
-      <link rel="stylesheet" href="resources/styles/preview.css">
+      <link rel="stylesheet" href="/resources/styles/style.css">
+      <link rel="stylesheet" href="/resources/styles/gallery.css">
+      <link rel="stylesheet" href="/resources/styles/preview.css">
       <link rel="icon" href="https://www.pngall.com/wp-content/uploads/2016/07/Anime-PNG-Images.png"/>
    </head>
-   <body style="background-image: url('https://cdn.discordapp.com/attachments/778701516390793228/1111775745119899659/5.png')">
+
+    {{^have_images}}
+        <body style="background-image: url('https://preview.redd.it/d1owe2n7ev181.png?width=640&crop=smart&auto=webp&s=42f4aa3bfb8f94d01e37e1f1f49a5fec395f1a46')">
+    {{/have_images}}
+
+    {{#have_images}}
+        <body style="background-image: url('{{image.url}}')">
+    {{/have_images}}
+   
       <div class="main" style="backdrop-filter: blur(10px);">
          <!-- header pc -->
          <header class="header-gallery">
@@ -22,15 +30,29 @@
 
          </header>
         
+        
+      {{#have_images}}
         <section class="anime-images">
             <div class="box">
-            
-               <img src="https://cdn.discordapp.com/attachments/778701516390793228/1111775745119899659/5.png" width="540px" class="preview-image">
-               <h3 class="description">AI-generated neko waifu black hair girl From Nikawislet on pixiv</h3>
+               <img src="{{image.url}}" width="540px" class="preview-image">
+               <h3 class="description">{{image.description}}</h3>
             </div>
 
         </section>
+        {{>../src/views/partials/footer}}
+      {{/have_images}}
+
+    {{^have_images}}
+        <section class="anime-images">
+            <div class="box">
+               <img style="width:250px;text-align:center" src="https://preview.redd.it/d1owe2n7ev181.png?width=640&crop=smart&auto=webp&s=42f4aa3bfb8f94d01e37e1f1f49a5fec395f1a46" width="140px" class="preview-image">
+               <h3 class="description">You have encountered emptiness, there is nothing here.<br><a href="/home">Go to home</a></h3>
+            </div>
+
+        </section>
+      {{/have_images}}
       </div>  
+      
 
       
    </body>
