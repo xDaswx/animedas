@@ -8,7 +8,7 @@
   },
   "scripts": {
     "start": "node dist/server_side.js",
-    "install": "tsc",
+    "install": "tsc;cp -r src/views dist/views",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start-nodemon": "nodemon -e js,mustache,json,ts src/server_side.ts"
   },
