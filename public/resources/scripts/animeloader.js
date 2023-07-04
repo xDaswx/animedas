@@ -1,4 +1,6 @@
-fetch('https://animedas-production.up.railway.app/api/v1/random', {
+const url = document.URL.split('/gallery')[0]
+
+fetch(url+'/api/v1/many/random', {
     method: 'GET',
     headers:{
         'Content-Type': 'application/json'}
@@ -6,7 +8,7 @@ fetch('https://animedas-production.up.railway.app/api/v1/random', {
     return response.json()
 }).then((json)=> {
     const divanime = document.querySelector('.api-images')
-    for (animeimg of json.conteudo) {
+    for (animeimg of json.content) {
 
         let newdiv = document.createElement('div');
         newdiv.classList.add('image-loaded');
