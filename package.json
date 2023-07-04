@@ -2,12 +2,12 @@
   "name": "dsw-anime",
   "version": "1.0.0",
   "description": "anime api project",
-  "main": "dist/teste.js",
+  "main": "dist/server_side.js",
   "engines": {
     "node": "18.x"
   },
   "scripts": {
-    "start": "node dist/teste.js",
+    "start": "node dist/server_side.js",
     "install": "copyfiles -u 1 src/**/*.mustache dist/",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start-nodemon": "nodemon -e js,mustache,json,ts src/server_side.ts"
