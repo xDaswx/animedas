@@ -9,6 +9,7 @@ import {sequelize} from '../instances/pg_connection'
 const getSome = async (req:Request,res:Response) => {
     try{
         let animes = await AnimeDatabase.findAll({
+        order:sequelize.random(),
         limit:20,
         })
         if (animes === null){
