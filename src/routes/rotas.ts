@@ -5,7 +5,7 @@ import * as animeController from '../controllers/animeAPIController';
 
 const router =  Router()
 
-router.get('/many/random',animeController.getSome);
+router.get('/many/:type',animeController.getSome);
 router.get('/random',animeController.getRandom);
 router.get('/random/maid',animeController.getRandomMaid);
 router.get('/random/waifu',animeController.getRandomWaifu);

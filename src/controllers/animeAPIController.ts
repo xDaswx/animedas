@@ -7,12 +7,24 @@ import {sequelize} from '../instances/pg_connection'
 
 
 const getSome = async (req:Request,res:Response) => {
+    const type = req.params.type
     try{
-        let animes = await AnimeDatabase.findAll({
-        order:sequelize.random(),
-        limit:20,
-        })
-        if (animes === null){
+        let animes;
+        if (type == 'random'){
+            animes = await AnimeDatabase.findAll({
+            order:sequelize.random(),
+            limit:20})
+        }
+        else{
+            animes = await AnimeDatabase.findAll({
+            where:{
+                tag_type:type
+            },
+            order:sequelize.random(),
+            limit:20})
+
+        }
+        if (animes.length == 0){
             return res.status(200).json({message:{error:'No Content',status:204}, content: null})
         }
         res.status(200).json({message:'Successful', content: animes})
