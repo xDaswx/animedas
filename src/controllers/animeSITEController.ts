@@ -24,26 +24,30 @@ const gallery = ((req:Request, res:Response)=> {
 })
 
 const galleryMaid =  ( async (req:Request, res:Response)=> {
-    const serverUrl = `${req.protocol}://${req.headers.host}`;
-    //const request = await axios.get(serverUrl+'/gallery/maid')
-    console.log(serverUrl)
-
-    res.render(dir+'/galleryMany',{endpoint:'request'})
+    const serverUrl = `${req.protocol}://${req.headers.host}/api/v1/`;
+    const {data} = await axios.get(serverUrl+'many/maid')
+    res.render(dir+'/galleryMany',{data:data.content})
 })
 
-const galleryWaifu = ((req:Request, res:Response)=> {
+const galleryWaifu = (async (req:Request, res:Response)=> {
+    const serverUrl = `${req.protocol}://${req.headers.host}/api/v1/`;
+    const {data} = await axios.get(serverUrl+'many/waifu')
 
-    res.render(dir+'/galleryMany',{endpoint:'/api/v1/random/waifu'})
+    res.render(dir+'/galleryMany',{data:data.content})
 })
 
-const gallerySmug = ((req:Request, res:Response)=> {
+const gallerySmug = (async (req:Request, res:Response)=> {
+    const serverUrl = `${req.protocol}://${req.headers.host}/api/v1/`;
+    const {data} = await axios.get(serverUrl+'many/smug')
 
-    res.render(dir+'/galleryMany',{endpoint:'/api/v1/random/smug'})
+    res.render(dir+'/galleryMany',{data:data.content})
 })
 
-const galleryGenshin = ((req:Request, res:Response)=> {
+const galleryGenshin = (async (req:Request, res:Response)=> {
+    const serverUrl = `${req.protocol}://${req.headers.host}/api/v1/`;
+    const {data} = await axios.get(serverUrl+'many/genshin')
 
-    res.render(dir+'/galleryMany',{endpoint:'/api/v1/random/genshin'})
+    res.render(dir+'/galleryMany',{data:data.content})
 })
 
 const seeByID = (async (req:Request, res:Response)=>{
