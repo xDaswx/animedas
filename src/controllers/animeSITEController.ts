@@ -1,5 +1,6 @@
 import {Request,Response} from "express";
 import {AnimeDatabase} from '../models/animeModel'
+import axios from "axios";
 import path from "path";
 
 
@@ -20,6 +21,29 @@ const home = ((req:Request, res:Response)=> {
 const gallery = ((req:Request, res:Response)=> {
 
     res.render(dir+'/gallery')
+})
+
+const galleryMaid =  ( async (req:Request, res:Response)=> {
+    const serverUrl = `${req.protocol}://${req.headers.host}`;
+    //const request = await axios.get(serverUrl+'/gallery/maid')
+    console.log(serverUrl)
+
+    res.render(dir+'/galleryMany',{endpoint:'request'})
+})
+
+const galleryWaifu = ((req:Request, res:Response)=> {
+
+    res.render(dir+'/galleryMany',{endpoint:'/api/v1/random/waifu'})
+})
+
+const gallerySmug = ((req:Request, res:Response)=> {
+
+    res.render(dir+'/galleryMany',{endpoint:'/api/v1/random/smug'})
+})
+
+const galleryGenshin = ((req:Request, res:Response)=> {
+
+    res.render(dir+'/galleryMany',{endpoint:'/api/v1/random/genshin'})
 })
 
 const seeByID = (async (req:Request, res:Response)=>{
@@ -44,4 +68,4 @@ const seeByID = (async (req:Request, res:Response)=>{
 
 })
 
-export default {home,gallery,seeByID}
+export default {home,gallery,galleryMaid,galleryWaifu,gallerySmug,galleryGenshin,seeByID}
