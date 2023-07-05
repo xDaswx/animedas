@@ -105,7 +105,7 @@ const getRandomGenshin = async (req:Request,res:Response) => {
 
         let conteudos = await AnimeDatabase.findOne({
         where: {
-            tag_type:'genshin '
+            tag_type:'genshin'
         },
         order: sequelize.random(),
         limit:1

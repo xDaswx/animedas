@@ -1,5 +1,6 @@
 import {Request,Response} from "express";
 import {AnimeDatabase} from '../models/animeModel'
+import axios from "axios";
 import path from "path";
 
 
@@ -20,6 +21,33 @@ const home = ((req:Request, res:Response)=> {
 const gallery = ((req:Request, res:Response)=> {
 
     res.render(dir+'/gallery')
+})
+
+const galleryMaid =  ( async (req:Request, res:Response)=> {
+    const serverUrl = `${req.protocol}://${req.headers.host}/api/v1/`;
+    const {data} = await axios.get(serverUrl+'many/maid')
+    res.render(dir+'/galleryMany',{data:data.content})
+})
+
+const galleryWaifu = (async (req:Request, res:Response)=> {
+    const serverUrl = `${req.protocol}://${req.headers.host}/api/v1/`;
+    const {data} = await axios.get(serverUrl+'many/waifu')
+
+    res.render(dir+'/galleryMany',{data:data.content})
+})
+
+const gallerySmug = (async (req:Request, res:Response)=> {
+    const serverUrl = `${req.protocol}://${req.headers.host}/api/v1/`;
+    const {data} = await axios.get(serverUrl+'many/smug')
+
+    res.render(dir+'/galleryMany',{data:data.content})
+})
+
+const galleryGenshin = (async (req:Request, res:Response)=> {
+    const serverUrl = `${req.protocol}://${req.headers.host}/api/v1/`;
+    const {data} = await axios.get(serverUrl+'many/genshin')
+
+    res.render(dir+'/galleryMany',{data:data.content})
 })
 
 const seeByID = (async (req:Request, res:Response)=>{
@@ -44,4 +72,4 @@ const seeByID = (async (req:Request, res:Response)=>{
 
 })
 
-export default {home,gallery,seeByID}
+export default {home,gallery,galleryMaid,galleryWaifu,gallerySmug,galleryGenshin,seeByID}
