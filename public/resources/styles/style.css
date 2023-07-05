@@ -38,6 +38,9 @@
 body {
     background: #1c151f;
 }
+a{
+    color: inherit;
+}
 
 .header {
     display: flex;
