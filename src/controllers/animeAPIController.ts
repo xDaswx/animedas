@@ -35,7 +35,7 @@ const getSome = async (req:Request,res:Response) => {
 }
 
 const getById = async (req:Request,res:Response) => {
-    const id = req.params.id
+    let id = req.params.id
     try{
         let anime = await AnimeDatabase.findOne({
             where:{
@@ -193,4 +193,4 @@ const deleteAnime = async (req:Request, res:Response) => {
 }
 
 
-export {getRandom,getRandomMaid,getRandomWaifu,getRandomSmug,getRandomGenshin,getSome,putAnime,deleteAnime};
+export {getRandom,getRandomMaid,getRandomWaifu,getRandomSmug,getRandomGenshin,getSome,getById,putAnime,deleteAnime};
