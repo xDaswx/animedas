@@ -1,15 +1,9 @@
 import express, { NextFunction, Request, Response } from 'express';
-import path from 'path';
-import mustacheExpress from 'mustache-express';
 import APIrouters from './routes/rotas'
-import SITErouters from './routes/SITErotas'
 import cors from 'cors'
 require('dotenv').config()
 
 const app = express();
-app.engine('mustache', mustacheExpress())
-app.set('view engine', 'mustache')
-app.set('views', path.join(__dirname,'/views'))
 app.use(express.json());
 
 app.use(cors({
@@ -30,7 +24,6 @@ app.use((err: any, req: Request, res: Response, next: NextFunction) => {
 });
 
 app.use('/api/v1',APIrouters)
-app.use('/',SITErouters)
 
 //Middleware se a path não for encontrada
 app.use('/api/v1', (req:Request, res:Response) => {
