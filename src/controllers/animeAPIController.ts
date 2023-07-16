@@ -34,6 +34,25 @@ const getSome = async (req:Request,res:Response) => {
     }
 }
 
+const getById = async (req:Request,res:Response) => {
+    const id = req.params.id
+    try{
+        let anime = await AnimeDatabase.findOne({
+            where:{
+                id
+            }
+        })
+
+        if (!anime){
+            return res.status(200).json({message:{error:'No Content',status:204}, content: null})
+        }
+        res.status(200).json({message:'Successful', content: anime})
+    }catch (err){
+        res.status(200).json({message:'Error', content: []})
+
+    }
+}
+
 const getRandom = async (req:Request,res:Response) => {
     try{
 
