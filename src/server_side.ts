@@ -31,7 +31,7 @@ app.use('/api/v1', (req:Request, res:Response) => {
 });
 
 app.use((req:Request, res:Response)=>{
-    res.redirect('/home')
+    res.status(404).json({message:'Not Found', status:404})
 })
 
 // Iniciar servidor
