@@ -8,7 +8,7 @@
   },
   "scripts": {
     "start": "node dist/server_side.js",
-    "install": "tsc;cp -r src/views dist/views",
+    "install": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start-nodemon": "nodemon -e js,mustache,json,ts src/server_side.ts"
   },
@@ -18,11 +18,8 @@
   "author": "Dasw",
   "license": "ISC",
   "devDependencies": {
-    "@types/axios": "^0.14.0",
-    "@types/mustache-express": "^1.2.2",
     "@types/node": "^18.15.11",
     "@types/validator": "^13.7.14",
-    "@vercel/node": "^2.14.2",
     "copyfiles": "^2.4.1"
   },
   "dependencies": {
@@ -34,7 +31,6 @@
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "joi": "^17.9.2",
-    "mustache-express": "^1.3.2",
     "pg": "^8.10.0",
     "pg-hstore": "^2.3.4",
     "sequelize": "^6.31.1",
