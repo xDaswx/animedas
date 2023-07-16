@@ -7,7 +7,7 @@
     "node": "18.x"
   },
   "scripts": {
-    "build": "tsc",
+    "build": "tsc;cp -r src/views dist/views",
     "start": "node dist/server_side.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start-nodemon": "nodemon -e js,mustache,json,ts src/server_side.ts"
