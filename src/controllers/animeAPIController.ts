@@ -25,7 +25,7 @@ const getSome = async (req:Request,res:Response) => {
 
         }
         if (animes.length == 0){
-            return res.status(200).json({message:{error:'No Content',status:204}, content: null})
+            return res.status(200).json({message:{error:'No Content',status:204}, content: false})
         }
         res.status(200).json({message:'Successful', content: animes})
     }catch (err){
@@ -44,7 +44,7 @@ const getById = async (req:Request,res:Response) => {
         })
 
         if (!anime){
-            return res.status(200).json({message:{error:'No Content',status:204}, content: null})
+            return res.status(200).json({message:{error:'No Content',status:204}, content: false})
         }
         res.status(200).json({message:'Successful', content: anime})
     }catch (err){
