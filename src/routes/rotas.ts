@@ -12,6 +12,6 @@ router.get('/random/maid',animeController.getRandomMaid);
 router.get('/random/waifu',animeController.getRandomWaifu);
 router.get('/random/smug',animeController.getRandomSmug);
 router.get('/random/genshin',animeController.getRandomGenshin);
-router.post('/put/anime',validator,animeController.putAnime);
-router.post('/delete/anime',animeController.deleteAnime)
+router.post('/admin/put/anime',validator,animeController.putAnime);
+router.post('/admin/delete/anime',animeController.deleteAnime)
 export default router;
