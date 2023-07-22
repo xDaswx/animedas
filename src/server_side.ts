@@ -1,6 +1,7 @@
-import express, { NextFunction, Request, Response } from 'express';
+import express, { ErrorRequestHandler, Request, Response } from 'express';
 import APIrouters from './routes/rotas'
 import cors from 'cors'
+import passport from 'passport';
 require('dotenv').config()
 
 const app = express();
@@ -11,17 +12,23 @@ app.use(cors({
 }))
 
 app.use(express.static('public'))
+app.use(passport.initialize());
 
-// Middleware para capturar erros de análise de JSON em POST requests
-app.use((err: any, req: Request, res: Response, next: NextFunction) => {
-    if (err instanceof SyntaxError) {
-        return res.status(400).json({ message: 'JSON inválido'});
-    } 
-    else {
-        return res.status(500).json({ message: 'SERVER_ERROR'});
-      }
-  next();
-});
+
+const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
+    if(err.status) {
+        res.status(err.status);
+    } else {
+        res.status(400);
+    }
+    if(err.message) {
+        res.json({ error: err.message });
+    } else {
+        res.json({ error: 'Ocorreu algum erro.' });
+    }
+}
+
+
 
 app.use('/api/v1',APIrouters)
 
@@ -33,6 +40,8 @@ app.use('/api/v1', (req:Request, res:Response) => {
 app.use((req:Request, res:Response)=>{
     res.status(404).json({message:'Not Found', status:404})
 })
+
+app.use(errorHandler);
 
 // Iniciar servidor
 const port = 80;
