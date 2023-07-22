@@ -1,12 +1,13 @@
 import {Request,Response} from "express";
 import {AnimeDatabase} from '../models/animeModel'
 import {sequelize} from '../instances/pg_connection'
+import { generatejwt,isAdmin } from "../config/passport";
+import { User } from "../models/userModel";
+import bcrypt from "bcrypt";
 
 
 
-
-
-const getSome = async (req:Request,res:Response) => {
+export const getSome = async (req:Request,res:Response) => {
     const type = req.params.type
     try{
         let animes;
@@ -34,7 +35,7 @@ const getSome = async (req:Request,res:Response) => {
     }
 }
 
-const getById = async (req:Request,res:Response) => {
+export const getById = async (req:Request,res:Response) => {
     let id = req.params.id
     try{
         let anime = await AnimeDatabase.findOne({
@@ -53,7 +54,7 @@ const getById = async (req:Request,res:Response) => {
     }
 }
 
-const getRandom = async (req:Request,res:Response) => {
+export const getRandom = async (req:Request,res:Response) => {
     try{
 
         let conteudos = await AnimeDatabase.findOne({
@@ -71,7 +72,7 @@ const getRandom = async (req:Request,res:Response) => {
     }
 }
 
-const getRandomMaid = async (req:Request,res:Response) => {
+export const getRandomMaid = async (req:Request,res:Response) => {
     try{
 
         let conteudos = await AnimeDatabase.findOne({
@@ -92,7 +93,7 @@ const getRandomMaid = async (req:Request,res:Response) => {
     }
 }
 
-const getRandomWaifu = async (req:Request,res:Response) => {
+export const getRandomWaifu = async (req:Request,res:Response) => {
     try{
 
         let conteudos = await AnimeDatabase.findOne({
@@ -112,7 +113,7 @@ const getRandomWaifu = async (req:Request,res:Response) => {
     }
 }
 
-const getRandomSmug = async (req:Request,res:Response) => {
+export const getRandomSmug = async (req:Request,res:Response) => {
     try{
         let conteudos = await AnimeDatabase.findOne({
         where: {
@@ -131,7 +132,7 @@ const getRandomSmug = async (req:Request,res:Response) => {
     }
 }
 
-const getRandomGenshin = async (req:Request,res:Response) => {
+export const getRandomGenshin = async (req:Request,res:Response) => {
     try{
 
         let conteudos = await AnimeDatabase.findOne({
@@ -152,11 +153,67 @@ const getRandomGenshin = async (req:Request,res:Response) => {
     }
 }
 
-const putAnime = async (req:Request, res:Response) => {
+export const register = async (req: Request, res: Response) => {
+    if(req.body.name && req.body.password) {
+        let { name, password } = req.body;
 
-    const {tag_type,width,height,source,url,description,secret_key} = req.body
+        let hasUser = await User.findOne({where: { name }});
+        if(!hasUser) {
+            const passHashed = await bcrypt.hash(password,10);
+            console.log(passHashed)
+            let newUser = await User.create
+            ({ 
+                name,
+                isAdmin:false,
+                password:passHashed 
+            });
+            let UserToken = generatejwt({id:newUser.id,isAdmin:false});
 
-    if (secret_key !== process.env.SECRET_KEY) return res.status(403).json({message:'Wrong SecretKey'})
+            return res.status(201).json({ id: newUser.id,UserToken });
+        } else {
+            return res.json({ error: 'Invalid password' });
+        }
+    }
+
+    res.json({ message:'Name and password not received' });
+}
+
+export const login = async (req: Request, res: Response) => {
+    if(req.body.name && req.body.password) {
+        let name: string = req.body.name;
+        let password: string = req.body.password;
+        try {
+            let user = await User.findOne({ 
+                where: { name}
+            });
+            const passHashed = await bcrypt.compare(password,user?.password as string)
+            if(user && passHashed){
+                let UserToken = generatejwt({id:user.id, isAdmin:user.isAdmin});
+                return res.json({token: UserToken});
+            }
+            else {
+                return res.json({ error: 'User does not exist' });
+            }
+
+        } catch (error) {
+            console.log(error)
+            return res.json({ message:'Server error' });
+        }
+
+    }
+
+    return res.json({ message:'Name and password not received' });
+}
+
+export const putAnime = async (req:Request, res:Response) => {
+
+    const {tag_type,source,url,description,secret_key} = req.body
+
+    if (req.headers.authorization && !isAdmin(req.headers.authorization)) {
+        return res.status(403).json({ message: 'Not an admin' });
+    }
+
+    if (secret_key !== process.env.JWT_SECRET_KEY) return res.status(403).json({message:'Wrong SecretKey'})
     
     try {
         const put = await AnimeDatabase.create({
@@ -173,10 +230,15 @@ const putAnime = async (req:Request, res:Response) => {
     }
 }
 
-const deleteAnime = async (req:Request, res:Response) => {
+export const deleteAnime = async (req:Request, res:Response) => {
     const {id,secret_key} = req.body
+    
+    if (req.headers.authorization && !isAdmin(req.headers.authorization)) {
+        return res.status(403).json({ message: 'Not an admin' });
+    }
 
-    if (secret_key !== process.env.SECRET_KEY) return res.status(403).json({message:'Wrong SecretKey'})
+
+    if (secret_key !== process.env.JWT_SECRET_KEY) return res.status(403).json({message:'Wrong SecretKey'})
     try{
         let AnimeDeleteById = await AnimeDatabase.destroy({
         where:{
@@ -191,6 +253,3 @@ const deleteAnime = async (req:Request, res:Response) => {
     }
 
 }
-
-
-export {getRandom,getRandomMaid,getRandomWaifu,getRandomSmug,getRandomGenshin,getSome,getById,putAnime,deleteAnime};
