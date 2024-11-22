@@ -1,7 +1,7 @@
 
 <img src="https://user-images.githubusercontent.com/69166890/230820887-3b2e84c8-dcfd-4d37-a897-8ffd718766aa.png" height="100px">
 
-# animedas
+# animedas https://animedas.pics/home
 
 Animédas is a website that I created to provide high-quality and free anime icons for personal and commercial use. 
 The main goal of this project is to offer a diverse and comprehensive collection of anime-inspired icons that can be used on various platforms such as websites, apps, games, and more.
