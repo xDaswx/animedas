@@ -15,3 +15,5 @@ Animédas is a project in constant evolution and I am always working to improve 
 I hope this website can be useful to you in your projects and I appreciate your visit and use of the resources available here.
 
 If you have any suggestions or questions, please do not hesitate to contact me. Thank you for using Animédas!
+
+Front-end repo: https://github.com/xDaswx/animedas-angular
